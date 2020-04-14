@@ -16,6 +16,7 @@ namespace Mvc2Hockey
     {
         public Startup(IConfiguration configuration)
         {
+            //Hello
             Configuration = configuration;
         }
 
