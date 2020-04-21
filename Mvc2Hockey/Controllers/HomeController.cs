@@ -12,10 +12,12 @@ namespace Mvc2Hockey.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly HockeyDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, HockeyDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -25,6 +27,7 @@ namespace Mvc2Hockey.Controllers
 
         public IActionResult Privacy()
         {
+            var a = _context.Players.ToList();
             return View();
         }
 
