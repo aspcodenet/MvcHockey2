@@ -6,6 +6,8 @@
 }
 
 <h2>Players</h2>
+<a asp-controller="Player" asp-action="New">Create new</a>
+
 <table class="table">
     <thead>
     <tr>
@@ -17,7 +19,7 @@
     {
         <tr>
             <td>
-                <a asp-controller="Player" asp-action="View" asp-route-id="@p.Id">
+                <a asp-controller="Player" asp-action="Edit" asp-route-id="@p.Id">
                     @p.Name
                 </a>
             </td>

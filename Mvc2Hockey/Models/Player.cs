@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mvc2Hockey.Models
 {
@@ -9,7 +12,10 @@ namespace Mvc2Hockey.Models
         public int JerseyNumber { get; set; }
         public int Age { get; set; }
 
+        public int NrOfCars { get; set; }
         public List<HistoryRecords> HistoryRecords { get; set; } = new List<HistoryRecords>();
+
+        public Team Team { get; set; } 
     }
 
 
@@ -17,6 +23,7 @@ namespace Mvc2Hockey.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
     }
 
 

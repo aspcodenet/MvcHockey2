@@ -29,9 +29,6 @@ namespace Mvc2Hockey
             services.AddDbContext<HockeyDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-
-
-            services.AddTransient<IPlayerRepository, PlayerRepository>();
             services.AddControllersWithViews();
         }
 

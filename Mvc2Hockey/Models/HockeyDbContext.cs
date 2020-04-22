@@ -13,6 +13,11 @@ namespace Mvc2Hockey.Models
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<EmailSubscriber> EmailSubscribers { get; set; }
 
         public DbSet<Player> Players { get; set; }
