@@ -10,7 +10,7 @@ namespace Mvc2Hockey.Models
     {
         public void Initialize(HockeyDbContext context)
         {
-            context.Database.EnsureCreated();
+            //context.Database.EnsureCreated();
             context.Database.Migrate();
             SeedData(context);
         }

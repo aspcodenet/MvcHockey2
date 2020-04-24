@@ -33,15 +33,24 @@ namespace Mvc2Hockey.ViewModels
 
         [Required] public string Name { get; set; }
 
-        [PersonNummer] public string PersonNummer { get; set; }
+        //[PersonNummer] public string PersonNummer { get; set; }
 
         //[Remote("CheckJersey","Player")]
         public int JerseyNumber { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime FirstNhlGame { get; set; }
+        //[DataType(DataType.Date)]
+        //public DateTime FirstNhlGame { get; set; }
 
         [Range(1, 100)] public int Age { get; set; }
+
+
+        [Required]
+        public int TeamId { get; set; }
+        public List<SelectListItem> AllTeams { get; set; } = new List<SelectListItem>();
+
+
+        public int PositionEnumValue { get; set; }
+        public List<SelectListItem> AllPositions { get; set; } = new List<SelectListItem>();
 
 
     }

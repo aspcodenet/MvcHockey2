@@ -5,6 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mvc2Hockey.Models
 {
+
+    public enum Position
+    {
+        Goalie,
+        Defender,
+        Forward
+    }
+
     public class Player
     {
         public int Id { get; set; }
@@ -15,7 +23,9 @@ namespace Mvc2Hockey.Models
         public int NrOfCars { get; set; }
         public List<HistoryRecords> HistoryRecords { get; set; } = new List<HistoryRecords>();
 
-        public Team Team { get; set; } 
+        public Team Team { get; set; }
+
+        public Position Position { get; set; }
     }
 
 

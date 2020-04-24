@@ -1,6 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Mvc2Hockey.Models;
 using Mvc2Hockey.ViewModels;
 
@@ -39,6 +43,10 @@ namespace Mvc2Hockey.Controllers
         public IActionResult New()
         {
             var model = new PlayerViewModel();
+            model.AllTeams = GetAllTeams();
+            model.AllPositions = Enum.GetValues(typeof(Position)).Cast<Position>()
+                .Select(v => new SelectListItem {Text = v.ToString(), Value = ((int) v).ToString()})
+                .ToList();
             return View("Edit", model);
         }
 
@@ -67,10 +75,13 @@ namespace Mvc2Hockey.Controllers
                 p.Name = viewModel.Name;
                 p.Age = viewModel.Age;
                 p.JerseyNumber = viewModel.JerseyNumber;
+                p.Team = _dbContext.Team.FirstOrDefault(t => t.Id == viewModel.TeamId);
                 _dbContext.Players.Add(p);
                 _dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            viewModel.AllTeams = GetAllTeams();
             return View("Edit", viewModel);
         }
 
@@ -79,11 +90,26 @@ namespace Mvc2Hockey.Controllers
 
         public IActionResult Edit(int id)
         {
-            var p = _dbContext.Players.FirstOrDefault(a => a.Id == id);
+            var p = _dbContext.Players.Include(r=>r.Team).FirstOrDefault(a => a.Id == id);
             var viewModel = new PlayerViewModel {
-                DbNumber = id, Name = p.Name, 
+                DbNumber = id, Name = p.Name,
+                TeamId = p.Team == null ? 0 : p.Team.Id,
+                AllTeams = GetAllTeams(),
                 JerseyNumber = p.JerseyNumber, Age = p.Age };
             return View(viewModel);
+        }
+
+        private List<SelectListItem> GetAllTeams()
+        {
+            var l = _dbContext.Team.Select(r => new SelectListItem
+            {
+                Text = r.Name,
+                Value = r.Id.ToString()
+            }).ToList();
+
+            l.Insert(0,new SelectListItem("Select a team",""));
+
+            return l;
         }
 
 
@@ -97,10 +123,12 @@ namespace Mvc2Hockey.Controllers
                 var p = _dbContext.Players.FirstOrDefault(r => r.Id == viewModel.DbNumber);
                 p.Name = viewModel.Name;
                 p.Age = viewModel.Age;
+                p.Team = _dbContext.Team.First(r => r.Id == viewModel.TeamId);
                 p.JerseyNumber = viewModel.JerseyNumber;
                 _dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
+            viewModel.AllTeams = GetAllTeams();
             return View(viewModel);
         }
 
