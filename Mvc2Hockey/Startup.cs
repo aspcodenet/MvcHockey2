@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Mvc2Hockey.Models;
+using Mvc2Hockey.Services;
 
 namespace Mvc2Hockey
 {
@@ -28,6 +29,8 @@ namespace Mvc2Hockey
         {
             services.AddDbContext<HockeyDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<ITransferService, TransferService>();
 
             services.AddControllersWithViews();
         }

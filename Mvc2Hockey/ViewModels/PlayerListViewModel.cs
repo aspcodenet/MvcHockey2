@@ -7,6 +7,18 @@ using Mvc2Hockey.Models;
 
 namespace Mvc2Hockey.ViewModels
 {
+
+    public class PlayerTransferViewModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string CurrentTeam { get; set; }
+        
+        [Required]
+        public int TeamId { get; set; }
+        public List<SelectListItem> AllTeams { get; set; } = new List<SelectListItem>();
+    }
+
     public class PlayerListViewModel
     {
         public int Id { get; set; }

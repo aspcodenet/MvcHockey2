@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mvc2Hockey.Models;
 
 namespace Mvc2Hockey.Migrations
 {
     [DbContext(typeof(HockeyDbContext))]
-    partial class HockeyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200525063048_Position")]
+    partial class Position
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

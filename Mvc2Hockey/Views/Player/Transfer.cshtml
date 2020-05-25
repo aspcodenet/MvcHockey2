@@ -1,0 +1,26 @@
+﻿@model Mvc2Hockey.ViewModels.PlayerTransferViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "_Layout";
+}
+
+<h2>Transfer Player @Model.Name</h2>
+<h3>Current team @Model.CurrentTeam</h3>
+
+<form method="post">
+
+    <div class="form-group">
+        <label asp-for="TeamId" class="control-label"></label>
+        <select asp-for="TeamId" asp-items="Model.AllTeams" class="form-control">
+        </select>
+        <span asp-validation-for="TeamId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Transfer</button>
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}
