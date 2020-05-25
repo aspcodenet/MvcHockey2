@@ -18,7 +18,7 @@ namespace Mvc2Hockey.Services
         void Draft(int playerId, int newTeamId);
     }
 
-    class TransferService : ITransferService
+    public class TransferService : ITransferService
     {
         private readonly HockeyDbContext _context;
 
